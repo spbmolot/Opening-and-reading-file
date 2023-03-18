@@ -13,11 +13,11 @@ with open('3.txt', 'r', encoding='utf-8') as f3:
     dict_result[quantity_str_f3] = '3.txt'
 
 with open('total.txt', 'w+', encoding='utf-8') as t:
-    for p in range(1, len(dict_result) + 1):
-        with open(dict_result[min(dict_result.keys())], 'r+', encoding='utf-8') as f1:
+    for i in range(3):
+        with open(dict_result[min(dict_result.keys())], 'r+', encoding='utf-8') as f:
             t.write(dict_result[min(dict_result.keys())] + '\n')
             t.write(str(min(dict_result)) + '\n')
-            t.write(f1.read() + '\n')
+            t.write(f.read() + '\n')
             dict_result.pop(min(dict_result))
     t.seek(0)
     print(t.read())

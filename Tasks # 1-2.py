@@ -23,17 +23,12 @@ def get_list_cook_book():
 
 def get_shop_list_by_dishes(dishes, person_count):
     ingredients = {}
-    q = 0
-    for key, value in get_list_cook_book().items():
-        if key in dishes:
-            for ing in value:
-                if ing["ingredient_name"] not in ingredients:
-                    ingredients[ing["ingredient_name"]] = {"measure": ing["measure"], "quantity": int(ing["quantity"]) * person_count}
-                else:
-                    for key_, value_ in ingredients.items():
-                        if key_ == ing["ingredient_name"]:
-                            q = value_["quantity"]
-                    ingredients[ing["ingredient_name"]] = {"measure": ing["measure"], "quantity": int(ing["quantity"]) * person_count + q}
+    for n in dishes:
+        for ing in get_list_cook_book()[n]:
+            if ing["ingredient_name"] not in ingredients:
+                ingredients[ing["ingredient_name"]] = {"measure": ing["measure"], "quantity": int(ing["quantity"]) * person_count}
+            else:
+                ingredients[ing["ingredient_name"]]["quantity"] = int(ing["quantity"]) * person_count + ingredients[ing["ingredient_name"]]['quantity']
     pprint(ingredients)
 
 
